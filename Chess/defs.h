@@ -113,6 +113,8 @@ typedef struct
 
 #define FR2SQ(f, r) ((21 + (f)) + ((r) * 10))
 #define SQ64(sq120) sq120_to_sq64[sq120]
+#define POP(b) pop_bit(b)
+#define CNT(b) count_bits(b)
 
 extern int sq120_to_sq64[BRD_SQ_NUM];
 extern int sq64_to_sq120[64];
@@ -120,5 +122,7 @@ extern int sq64_to_sq120[64];
 extern void init();
 
 extern void printBitBoard(U64 bb);
+extern int pop_bit(U64* bb);
+extern int count_bits(U64 b);
 
 #endif /* DEFS_H */
