@@ -18,10 +18,6 @@ void printBitBoard(U64 bb)
 			sq = FR2SQ(file, rank);
 			sq64 = SQ64(sq);
 
-			//if ((shiftMe << sq64) & bb)
-			//	printf("X");
-			//else
-			//	printf("-");
 			printf(((shiftMe << sq64) & bb) ? "X" : "-");
 		}
 
