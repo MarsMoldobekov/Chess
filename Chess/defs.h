@@ -115,9 +115,13 @@ typedef struct
 #define SQ64(sq120) sq120_to_sq64[sq120]
 #define POP(b) pop_bit(b)
 #define CNT(b) count_bits(b)
+#define CLRBIT(bb, sq) ((bb) &= clear_mask[(sq)])
+#define SETBIT(bb, sq) ((bb) |= set_mask[(sq)])
 
 extern int sq120_to_sq64[BRD_SQ_NUM];
 extern int sq64_to_sq120[64];
+extern U64 set_mask[64];
+extern U64 clear_mask[64];
 
 extern void init();
 
