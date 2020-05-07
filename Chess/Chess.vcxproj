@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bitboards.c" />
     <ClCompile Include="init.c" />
     <ClCompile Include="vice.c" />
   </ItemGroup>

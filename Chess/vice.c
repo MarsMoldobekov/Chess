@@ -3,6 +3,6 @@
 
 int main(int argc, char** argv)
 {
-	init();	
+	init();
 	return 0;
 }

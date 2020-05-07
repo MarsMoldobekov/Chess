@@ -112,10 +112,13 @@ typedef struct
 } s_board;
 
 #define FR2SQ(f, r) ((21 + (f)) + ((r) * 10))
+#define SQ64(sq120) sq120_to_sq64[sq120]
 
 extern int sq120_to_sq64[BRD_SQ_NUM];
 extern int sq64_to_sq120[64];
 
 extern void init();
+
+extern void printBitBoard(U64 bb);
 
 #endif /* DEFS_H */
