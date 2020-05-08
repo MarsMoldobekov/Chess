@@ -60,7 +60,7 @@ enum
     A6 = 71, B6, C6, D6, E6, F6, G6, H6,
     A7 = 81, B7, C7, D7, E7, F7, G7, H7,
     A8 = 91, B8, C8, D8, E8, F8, G8, H8,
-    NO_SQ
+    NO_SQ, OFFBOARD
 };
 
 enum
@@ -112,7 +112,8 @@ typedef struct
 } s_board;
 
 #define FR2SQ(f, r) ((21 + (f)) + ((r) * 10))
-#define SQ64(sq120) sq120_to_sq64[sq120]
+#define SQ64(sq120) (sq120_to_sq64[(sq120)])
+#define SQ120(sq64) (sq64_to_sq120[(sq64)])
 #define POP(b) pop_bit(b)
 #define CNT(b) count_bits(b)
 #define CLRBIT(bb, sq) ((bb) &= clear_mask[(sq)])
@@ -120,10 +121,8 @@ typedef struct
 
 extern int sq120_to_sq64[BRD_SQ_NUM];
 extern int sq64_to_sq120[64];
-
 extern U64 set_mask[64];
 extern U64 clear_mask[64];
-
 extern U64 pieceKeys[13][120];
 extern U64 sideKey;
 extern U64 castleKeys[16];
@@ -135,5 +134,7 @@ extern int pop_bit(U64* bb);
 extern int count_bits(U64 b);
 
 extern U64 generate_pos_key(const s_board* pos);
+
+extern void reset_board(s_board* pos);
 
 #endif /* DEFS_H */
