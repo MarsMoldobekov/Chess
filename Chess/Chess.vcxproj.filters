@@ -24,6 +24,9 @@
     <ClCompile Include="bitboards.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="hashkeys.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defs.h">

@@ -120,13 +120,20 @@ typedef struct
 
 extern int sq120_to_sq64[BRD_SQ_NUM];
 extern int sq64_to_sq120[64];
+
 extern U64 set_mask[64];
 extern U64 clear_mask[64];
+
+extern U64 pieceKeys[13][120];
+extern U64 sideKey;
+extern U64 castleKeys[16];
 
 extern void init();
 
 extern void printBitBoard(U64 bb);
 extern int pop_bit(U64* bb);
 extern int count_bits(U64 b);
+
+extern U64 generate_pos_key(const s_board* pos);
 
 #endif /* DEFS_H */
