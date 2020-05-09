@@ -1,6 +1,34 @@
 #include <stdio.h>
 #include "defs.h"
 
+void update_lists_material(s_board* pos)
+{
+	int piece, sq, color;
+
+	for (int i = 0; i < BRD_SQ_NUM; i++)
+	{
+		sq = i;
+		piece = pos->pieces[i];
+
+		if (piece != OFFBOARD && piece != EMPTY)
+		{
+			color = pieceCol[piece];
+			
+			if (pieceBig[piece] == TRUE) pos->bigPce[color]++;
+			if (pieceMaj[piece] == TRUE) pos->majPce[color]++;
+			if (pieceMin[piece] == TRUE) pos->minPce[color]++;
+
+			pos->material[color] += pieceVal[piece];
+
+			pos->pList[piece][pos->pceNum[piece]] = sq;
+			pos->pceNum[piece]++;
+
+			if (piece == wK) pos->kingSq[WHITE] = sq;
+			if (piece == bK) pos->kingSq[BLACK] = sq;
+		}
+	}
+}
+
 int parse_fen(char* fen, s_board* pos)
 {
 	ASSERT(fen != NULL);
@@ -134,7 +162,7 @@ void reset_board(s_board* pos)
 		pos->pieces[SQ64(i)] = EMPTY;
 	}
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 2; i++)
 	{
 		pos->bigPce[i] = 0;
 		pos->majPce[i] = 0;
@@ -159,4 +187,43 @@ void reset_board(s_board* pos)
 	pos->castlePerm = 0;
 
 	pos->posKey = 0ULL;
+}
+
+void print_board(const s_board* pos)
+{
+	int sq, file, rank, piece;
+
+	printf("\nGame Board:\n\n");
+
+	for (rank = RANK_8; rank >= RANK_1; rank--)
+	{
+		printf("%d  ", rank + 1);
+
+		for (file = FILE_A; file <= FILE_H; file++)
+		{
+			sq = FR2SQ(file, rank);
+			piece = pos->pieces[sq];
+			printf("%3c", pceChar[piece]);
+		}
+
+		printf("\n");
+	}
+
+	printf("\n   ");
+	for (file = FILE_A; file <= FILE_H; file++)
+	{
+		printf("%3c", 'a' + file);
+	}
+	printf("\n");
+
+	printf("side: %c\n", sideChar[pos->side]);
+	printf("enPas: %d\n", pos->enPas);
+	printf(
+		"castle: %c%c%c%c\n",
+		pos->castlePerm & WKCA ? 'K' : '-',
+		pos->castlePerm & WQCA ? 'Q' : '-',
+		pos->castlePerm & BKCA ? 'k' : '-',
+		pos->castlePerm & BQCA ? 'q' : '-'
+	);
+	printf("PosKey: %llX\n", pos->posKey);
 }

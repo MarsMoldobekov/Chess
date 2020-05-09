@@ -9,6 +9,7 @@
 #ifndef DEBUG
 #define ASSERT(n)
 #else
+#include <stdio.h>
 #define ASSERT(n) \
     if (!(n)) \
     { \
@@ -104,9 +105,10 @@ typedef struct
     U64 posKey;
 
     int pceNum[13];
-    int bigPce[3];
-    int majPce[3];
-    int minPce[3];
+    int bigPce[2];
+    int majPce[2];
+    int minPce[2];
+    int material[2];
 
     s_undo history[MAXGAMEMOVES];
 
@@ -128,6 +130,16 @@ extern U64 clear_mask[64];
 extern U64 pieceKeys[13][120];
 extern U64 sideKey;
 extern U64 castleKeys[16];
+extern char pceChar[];
+extern char sideChar[];
+extern char rankChar[];
+extern char fileChar[];
+
+extern int pieceBig[13];
+extern int pieceMaj[13];
+extern int pieceMin[13];
+extern int pieceVal[13];
+extern int pieceCol[13];
 
 extern void init();
 
@@ -138,5 +150,8 @@ extern int count_bits(U64 b);
 extern U64 generate_pos_key(const s_board* pos);
 
 extern void reset_board(s_board* pos);
+extern int parse_fen(char* fen, s_board* pos);
+extern void print_board(const s_board* pos);
+extern void update_lists_material(s_board* pos);
 
 #endif /* DEFS_H */

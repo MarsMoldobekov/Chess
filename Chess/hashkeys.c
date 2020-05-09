@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "defs.h"
 
 U64 generate_pos_key(const s_board* pos)
@@ -10,7 +11,7 @@ U64 generate_pos_key(const s_board* pos)
 	{
 		piece = pos->pieces[sq];
 
-		if (piece != NO_SQ && piece != EMPTY)
+		if (piece != NO_SQ && piece != EMPTY && piece != OFFBOARD)
 		{
 			ASSERT(piece >= wP && piece <= bK);
 			finalKey ^= pieceKeys[piece][sq];
@@ -24,7 +25,7 @@ U64 generate_pos_key(const s_board* pos)
 
 	if (pos->enPas != NO_SQ)
 	{
-		ASSERT(pos->enPas >= 0 && pos->enPas <= BRD_SQ_NUM);
+		ASSERT(pos->enPas >= 0 && pos->enPas < BRD_SQ_NUM);
 		finalKey ^= pieceKeys[EMPTY][pos->enPas];
 	}
 

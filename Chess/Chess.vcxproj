@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="bitboards.c" />
     <ClCompile Include="board.c" />
+    <ClCompile Include="data.c" />
     <ClCompile Include="hashkeys.c" />
     <ClCompile Include="init.c" />
     <ClCompile Include="vice.c" />

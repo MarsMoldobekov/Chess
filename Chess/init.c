@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "defs.h"
 
 #define RAND_64 ((U64)rand() | \
