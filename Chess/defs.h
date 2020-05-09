@@ -28,6 +28,8 @@ typedef unsigned long long U64;
 
 #define MAXGAMEMOVES 2048
 
+#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 enum
 {
     EMPTY,
@@ -71,7 +73,7 @@ enum
 enum
 {
     WKCA = 1, WQCA = 2,
-    BDCA = 4, BQCA = 8
+    BKCA = 4, BQCA = 8
 };
 
 typedef struct
