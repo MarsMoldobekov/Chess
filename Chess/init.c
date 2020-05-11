@@ -18,6 +18,34 @@ U64 pieceKeys[13][120];
 U64 sideKey;
 U64 castleKeys[16];
 
+int filesBrd[BRD_SQ_NUM];
+int ranksBrd[BRD_SQ_NUM];
+
+void init_files_ranks_brd()
+{
+	int i = 0;
+	int file = FILE_A;
+	int rank = RANK_1;
+	int sq = A1;
+	int sq64 = 0;
+
+	for (i = 0; i < BRD_SQ_NUM; i++)
+	{
+		filesBrd[i] = OFFBOARD;
+		ranksBrd[i] = OFFBOARD;
+	}
+
+	for (rank = RANK_1; rank <= RANK_8; rank++)
+	{
+		for (file = FILE_A; file <= FILE_H; file++)
+		{
+			sq = FR2SQ(file, rank);
+			filesBrd[sq] = file;
+			ranksBrd[sq] = rank;
+		}
+	}
+}
+
 void init_hash_keys()
 {
 	int i = 0;

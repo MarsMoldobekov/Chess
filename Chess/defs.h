@@ -141,6 +141,9 @@ extern int pieceMin[13];
 extern int pieceVal[13];
 extern int pieceCol[13];
 
+extern int filesBrd[BRD_SQ_NUM];
+extern int ranksBrd[BRD_SQ_NUM];
+
 extern void init();
 
 extern void printBitBoard(U64 bb);
