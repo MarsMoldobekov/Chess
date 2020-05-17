@@ -114,4 +114,5 @@ void init()
 	initSq120to64();
 	init_bit_masks();
 	init_hash_keys();
+	init_files_ranks_brd();
 }
