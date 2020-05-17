@@ -156,5 +156,6 @@ extern void reset_board(s_board* pos);
 extern int parse_fen(char* fen, s_board* pos);
 extern void print_board(const s_board* pos);
 extern void update_lists_material(s_board* pos);
+extern int check_board(const s_board* pos);
 
 #endif /* DEFS_H */
