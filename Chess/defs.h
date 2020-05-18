@@ -80,6 +80,12 @@ enum
 typedef struct
 {
     int move;
+    int score;
+} s_move;
+
+typedef struct
+{
+    int move;
     int castlePerm;
     int enPas;
     int fiftyMove;
@@ -114,6 +120,18 @@ typedef struct
 
     int pList[13][10];
 } s_board;
+
+#define FROMSQ(m) ((m) & 0x3F)
+#define TOSQ(m) (((m) >> 7) & 0x3F)
+#define CAPTURED(m) (((m) >> 14) & 0xF)
+#define PROMOTED(m) (((m) >> 20) & 0xF)
+
+#define MFLAGEP 0x40000
+#define MFLAGPS 0x80000
+#define MFLAGCA 0x1000000
+
+#define MFLAGCAP 0x7C000
+#define MFLAGPROM 0xF00000
 
 #define FR2SQ(f, r) ((21 + (f)) + ((r) * 10))
 #define SQ64(sq120) (sq120_to_sq64[(sq120)])
