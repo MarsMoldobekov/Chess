@@ -123,6 +123,11 @@ typedef struct
 #define CLRBIT(bb, sq) ((bb) &= clear_mask[(sq)])
 #define SETBIT(bb, sq) ((bb) |= set_mask[(sq)])
 
+#define IsBQ(p) (pieceBishopQueen[(p)])
+#define IsRQ(p) (pieceRookQueen[(p)])
+#define IsKn(p) (pieceKnight[(p)])
+#define IsKi(p) (pieceKing[(p)])
+
 extern int sq120_to_sq64[BRD_SQ_NUM];
 extern int sq64_to_sq120[64];
 extern U64 set_mask[64];
@@ -144,6 +149,11 @@ extern int pieceCol[13];
 extern int filesBrd[BRD_SQ_NUM];
 extern int ranksBrd[BRD_SQ_NUM];
 
+extern int pieceKnight[13];
+extern int pieceKing[13];
+extern int pieceRookQueen[13];
+extern int pieceBishopQueen[13];
+
 extern void init();
 
 extern void printBitBoard(U64 bb);
@@ -157,5 +167,7 @@ extern int parse_fen(char* fen, s_board* pos);
 extern void print_board(const s_board* pos);
 extern void update_lists_material(s_board* pos);
 extern int check_board(const s_board* pos);
+
+extern int square_attacked(const int sq, const int side, const s_board* pos);
 
 #endif /* DEFS_H */

@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="attack.c" />
     <ClCompile Include="bitboards.c" />
     <ClCompile Include="board.c" />
     <ClCompile Include="data.c" />
