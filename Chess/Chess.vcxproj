@@ -145,6 +145,8 @@
     <ClCompile Include="hashkeys.c" />
     <ClCompile Include="init.c" />
     <ClCompile Include="io.c" />
+    <ClCompile Include="movegen.c" />
+    <ClCompile Include="validate.c" />
     <ClCompile Include="vice.c" />
   </ItemGroup>
   <ItemGroup>

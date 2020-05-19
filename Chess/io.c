@@ -13,7 +13,7 @@ char* sprintf_square(const int sq)
 	return squareStr;
 }
 
-char* print_move(const int move)
+char* sprintf_move(const int move)
 {
 	static char moveStr[6];
 

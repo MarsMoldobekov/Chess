@@ -24,6 +24,10 @@ int square_attacked(const int sq, const int side, const s_board* pos)
 {
 	int pce, i, t_sq, dir;
 
+	ASSERT(square_on_board(sq));
+	ASSERT(side_valid(side));
+	ASSERT(check_board(pos));
+
 	//pawns
 	if (side == WHITE)
 	{

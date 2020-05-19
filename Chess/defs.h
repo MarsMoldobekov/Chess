@@ -28,6 +28,7 @@ typedef unsigned long long U64;
 #define BRD_SQ_NUM 120
 
 #define MAXGAMEMOVES 2048
+#define MAXPOSITIONMOVES 256
 
 #define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
@@ -82,6 +83,12 @@ typedef struct
     int move;
     int score;
 } s_move;
+
+typedef struct
+{
+    s_move moves[MAXPOSITIONMOVES];
+    int count;
+} s_move_lists;
 
 typedef struct
 {
@@ -189,6 +196,12 @@ extern int check_board(const s_board* pos);
 extern int square_attacked(const int sq, const int side, const s_board* pos);
 
 extern char* sprintf_square(const int sq);
-extern char* print_move(const int move);
+extern char* sprintf_move(const int move);
+
+extern int square_on_board(const int sq);
+extern int side_valid(const int side);
+extern int file_rank_valid(const int fr);
+extern int piece_valid_empty(const int pce);
+extern int piece_valid(const int pce);
 
 #endif /* DEFS_H */
