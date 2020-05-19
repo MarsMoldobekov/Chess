@@ -188,4 +188,7 @@ extern int check_board(const s_board* pos);
 
 extern int square_attacked(const int sq, const int side, const s_board* pos);
 
+extern char* sprintf_square(const int sq);
+extern char* print_move(const int move);
+
 #endif /* DEFS_H */

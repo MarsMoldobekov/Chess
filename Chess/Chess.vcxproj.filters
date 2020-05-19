@@ -36,6 +36,9 @@
     <ClCompile Include="attack.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="io.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defs.h">

@@ -144,6 +144,7 @@
     <ClCompile Include="data.c" />
     <ClCompile Include="hashkeys.c" />
     <ClCompile Include="init.c" />
+    <ClCompile Include="io.c" />
     <ClCompile Include="vice.c" />
   </ItemGroup>
   <ItemGroup>
