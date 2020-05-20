@@ -267,8 +267,10 @@ void reset_board(s_board* pos)
 		pos->bigPce[i] = 0;
 		pos->majPce[i] = 0;
 		pos->minPce[i] = 0;
+		pos->material[i] = 0;
 		pos->pawns[i] = 0ULL;
 	}
+	pos->pawns[2] = 0ULL;
 
 	for (i = 0; i < 13; i++)
 	{

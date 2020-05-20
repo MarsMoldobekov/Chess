@@ -1,11 +1,26 @@
 #include <stdio.h>
 #include "defs.h"
 
+//TODO --- combine methods
+
 #define MOVE(f, t, ca, pro, fl) \
 (\
 	(f) | ((t) << 7) | ((ca) << 14) | ((pro) << 20) | (fl) \
 )
 #define SQOFFBOARD(sq) (filesBrd[(sq)] == OFFBOARD)
+
+int loopSlidePce[8] =
+{
+	wB, wR, wQ, 0, bB, bR, bQ, 0
+};
+
+int loopNonSlidePce[6] =
+{
+	wN, wK, 0, bN, bK, 0
+};
+
+int loopSlideIndex[2] = { 0, 4 };
+int loopNonSlideIndex[2] = { 0, 3 };
 
 void add_quiet_move(const s_board* pos, int move, s_move_lists* list)
 {
@@ -30,6 +45,10 @@ void add_enPassant_move(const s_board* pos, int move, s_move_lists* list)
 
 void add_white_pawn_capture_move(const s_board* pos, const int from, const int to, const int cap, s_move_lists* list)
 {
+	ASSERT(piece_valid_empty(cap));
+	ASSERT(square_on_board(from));
+	ASSERT(square_on_board(to));
+
 	if (ranksBrd[from] == RANK_7)
 	{
 		add_capture_move(pos, MOVE(from, to, cap, wQ, 0), list);
@@ -45,6 +64,9 @@ void add_white_pawn_capture_move(const s_board* pos, const int from, const int t
 
 void add_white_pawn_move(const s_board* pos, const int from, const int to, s_move_lists* list)
 {
+	ASSERT(square_on_board(from));
+	ASSERT(square_on_board(to));
+
 	if (ranksBrd[from] == RANK_7)
 	{
 		add_quiet_move(pos, MOVE(from, to, EMPTY, wQ, 0), list);
@@ -60,6 +82,10 @@ void add_white_pawn_move(const s_board* pos, const int from, const int to, s_mov
 
 void add_black_pawn_capture_move(const s_board* pos, const int from, const int to, const int cap, s_move_lists* list)
 {
+	ASSERT(piece_valid_empty(cap));
+	ASSERT(square_on_board(from));
+	ASSERT(square_on_board(to));
+
 	if (ranksBrd[from] == RANK_2)
 	{
 		add_capture_move(pos, MOVE(from, to, cap, bQ, 0), list);
@@ -75,6 +101,9 @@ void add_black_pawn_capture_move(const s_board* pos, const int from, const int t
 
 void add_black_pawn_move(const s_board* pos, const int from, const int to, s_move_lists* list)
 {
+	ASSERT(square_on_board(from));
+	ASSERT(square_on_board(to));
+
 	if (ranksBrd[from] == RANK_2)
 	{
 		add_quiet_move(pos, MOVE(from, to, EMPTY, bQ, 0), list);
@@ -98,6 +127,10 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 	int side = pos->side;
 	int sq = 0, t_sq = 0;
 	int pceNum = 0;
+	int dir = 0;
+	int index = 0, pceIndex = 0;
+
+	printf("\n\nSide: %d\n", side);
 
 	if (side == WHITE)
 	{
@@ -174,5 +207,25 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 				add_capture_move(pos, MOVE(sq, sq - 11, EMPTY, EMPTY, MFLAGEP), list);
 			}
 		}
+	}
+
+	pceIndex = loopSlideIndex[side];
+	pce = loopSlidePce[pceIndex++];
+
+	while (pce != 0)
+	{
+		ASSERT(piece_valid(pce));
+		printf("Sliders pceIndex: %d pce: %d\n", pceIndex, pce);
+		pce = loopSlidePce[pceIndex++];
+	}
+
+	pceIndex = loopNonSlideIndex[side];
+	pce = loopNonSlidePce[pceIndex++];
+
+	while (pce != 0)
+	{
+		ASSERT(piece_valid(pce));
+		printf("Non-sliders pceIndex: %d pce: %d\n", pceIndex, pce);
+		pce = loopNonSlidePce[pceIndex++];
 	}
 }
