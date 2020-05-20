@@ -1,3 +1,6 @@
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning(disable: 6385)
+
 #include <stdio.h>
 #include "defs.h"
 
@@ -51,4 +54,20 @@ char* sprintf_move(const int move)
 	}
 
 	return moveStr;
+}
+
+void print_move_list(const s_move_lists* list)
+{
+	int score = 0;
+	int move = 0;
+
+	for (int i = 0; i < list->count; i++)
+	{
+		move = list->moves[i].move;
+		score = list->moves[i].score;
+
+		printf("Move: %d > %s (score: %d)\n", i + 1, sprintf_move(move), score);
+	}
+
+	printf("Move list total %d Moves: \n\n", list->count);
 }

@@ -197,11 +197,14 @@ extern int square_attacked(const int sq, const int side, const s_board* pos);
 
 extern char* sprintf_square(const int sq);
 extern char* sprintf_move(const int move);
+extern void print_move_list(const s_move_lists* list);
 
 extern int square_on_board(const int sq);
 extern int side_valid(const int side);
 extern int file_rank_valid(const int fr);
 extern int piece_valid_empty(const int pce);
 extern int piece_valid(const int pce);
+
+extern void generate_all_moves(const s_board* pos, s_move_lists* list);
 
 #endif /* DEFS_H */
