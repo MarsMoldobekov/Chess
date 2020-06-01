@@ -191,6 +191,28 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 				add_capture_move(pos, MOVE(sq, sq + 11, EMPTY, EMPTY, MFLAGEP), list);
 			}
 		}
+
+		if (pos->castlePerm & WKCA)
+		{
+			if (pos->pieces[F1] == EMPTY && pos->pieces[G1] == EMPTY)
+			{
+				if (!square_attacked(E1, BLACK, pos) && !square_attacked(F1, BLACK, pos))
+				{
+					printf("WKCA movegen\n");
+				}
+			}
+		}
+
+		if (pos->castlePerm & WQCA)
+		{
+			if (pos->pieces[D1] == EMPTY && pos->pieces[C1] == EMPTY && pos->pieces[B1] == EMPTY)
+			{
+				if (!square_attacked(E1, BLACK, pos) && !square_attacked(D1, BLACK, pos))
+				{
+					printf("WQCA movegen\n");
+				}
+			}
+		}
 	}
 	else
 	{
@@ -227,6 +249,28 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 			if (sq - 11 == pos->enPas)
 			{
 				add_capture_move(pos, MOVE(sq, sq - 11, EMPTY, EMPTY, MFLAGEP), list);
+			}
+		}
+
+		if (pos->castlePerm & BKCA)
+		{
+			if (pos->pieces[F8] == EMPTY && pos->pieces[G8] == EMPTY)
+			{
+				if (!square_attacked(E8, WHITE, pos) && !square_attacked(F8, WHITE, pos))
+				{
+					printf("BKCA movegen\n");
+				}
+			}
+		}
+
+		if (pos->castlePerm & BQCA)
+		{
+			if (pos->pieces[D8] == EMPTY && pos->pieces[C8] == EMPTY && pos->pieces[B8] == EMPTY)
+			{
+				if (!square_attacked(E8, WHITE, pos) && !square_attacked(D8, WHITE, pos))
+				{
+					printf("BQCA movegen\n");
+				}
 			}
 		}
 	}
