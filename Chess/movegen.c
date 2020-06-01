@@ -198,7 +198,7 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 			{
 				if (!square_attacked(E1, BLACK, pos) && !square_attacked(F1, BLACK, pos))
 				{
-					printf("WKCA movegen\n");
+					add_quiet_move(pos, MOVE(E1, G1, EMPTY, EMPTY, MFLAGCA), list);
 				}
 			}
 		}
@@ -209,7 +209,7 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 			{
 				if (!square_attacked(E1, BLACK, pos) && !square_attacked(D1, BLACK, pos))
 				{
-					printf("WQCA movegen\n");
+					add_quiet_move(pos, MOVE(E1, C1, EMPTY, EMPTY, MFLAGCA), list);
 				}
 			}
 		}
@@ -258,7 +258,7 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 			{
 				if (!square_attacked(E8, WHITE, pos) && !square_attacked(F8, WHITE, pos))
 				{
-					printf("BKCA movegen\n");
+					add_quiet_move(pos, MOVE(E8, G8, EMPTY, EMPTY, MFLAGCA), list);
 				}
 			}
 		}
@@ -269,7 +269,7 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 			{
 				if (!square_attacked(E8, WHITE, pos) && !square_attacked(D8, WHITE, pos))
 				{
-					printf("BQCA movegen\n");
+					add_quiet_move(pos, MOVE(E8, C8, EMPTY, EMPTY, MFLAGCA), list);
 				}
 			}
 		}
@@ -281,13 +281,11 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 	while (pce != 0)
 	{
 		ASSERT(piece_valid(pce));
-		printf("Sliders pceIndex: %d pce: %d\n", pceIndex, pce);
 
 		for (pceNum = 0; pceNum < pos->pceNum[pce]; pceNum++)
 		{
 			sq = pos->pList[pce][pceNum];
 			ASSERT(square_on_board(sq));
-			printf("Piece: %c on %s\n", pceChar[pce], sprintf_square(sq));
 
 			for (index = 0; index < numDir[pce]; index++)
 			{
@@ -300,13 +298,13 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 					{
 						if (pieceCol[pos->pieces[t_sq]] == (side ^ 1))
 						{
-							printf("\t\tCapture on %s\n", sprintf_square(t_sq));
+							add_capture_move(pos, MOVE(sq, t_sq, pos->pieces[t_sq], EMPTY, 0), list);
 						}
 
 						break;
 					}
 
-					printf("\t\tNormal on %s\n", sprintf_square(t_sq));
+					add_quiet_move(pos, MOVE(sq, t_sq, EMPTY, EMPTY, 0), list);
 					t_sq += dir;
 				}
 			}
@@ -321,13 +319,11 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 	while (pce != 0)
 	{
 		ASSERT(piece_valid(pce));
-		printf("Non-sliders pceIndex: %d pce: %d\n", pceIndex, pce);
 
 		for (pceNum = 0; pceNum < pos->pceNum[pce]; pceNum++)
 		{
 			sq = pos->pList[pce][pceNum];
 			ASSERT(square_on_board(sq));
-			printf("Piece: %c on %s\n", pceChar[pce], sprintf_square(sq));
 
 			for (index = 0; index < numDir[pce]; index++)
 			{
@@ -343,13 +339,13 @@ void generate_all_moves(const s_board* pos, s_move_lists* list)
 				{
 					if (pieceCol[pos->pieces[t_sq]] == (side ^ 1))
 					{
-						printf("\t\tCapture on %s\n", sprintf_square(t_sq));
+						add_capture_move(pos, MOVE(sq, t_sq, pos->pieces[t_sq], EMPTY, 0), list);
 					}
 
 					continue;
 				}
 
-				printf("\t\tNormal on %s\n", sprintf_square(t_sq));
+				add_quiet_move(pos, MOVE(sq, t_sq, EMPTY, EMPTY, 0), list);
 			}
 		}
 
